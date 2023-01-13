@@ -8,13 +8,19 @@ import { typeDefs } from './src/graphql/typedef.ts';
 const handler = async (request: Request) => {
 	const { pathname } = new URL(request.url);
 
-	if (pathname === '/graphql') {
+	if (pathname === '/api/v1/graphql') {
 		const graphql = await GraphQLHTTP<Request>({
 			schema: makeExecutableSchema({ resolvers, typeDefs }),
 			graphiql: true,
 		})(request);
 		return graphql;
-	} else {
+	} else if ((pathname === '/api/v1')){
+		const static_root = './src/graphql/documentation/public';
+		const _static = serveDir(request, {
+			fsRoot: static_root,
+		});
+		return _static;
+	} else { //TODO: redirect to frontend
 		const static_root = './src/graphql/documentation/public';
 		const _static = serveDir(request, {
 			fsRoot: static_root,
