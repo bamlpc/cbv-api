@@ -3,13 +3,13 @@ spectaql:
   targetDir: src/graphql/documentation/public
 
 introspection:
-  url: https://cbv-api.deno.dev/api/v1/graphql
+  url: https://cbv-api.deno.dev/graphql
   fieldExpansionDepth: 3
 
 
 info:
   title: CBV GraphQL API Reference
-  description: This is the documentation for the CBV API v1. Navite to https://cbv-api.deno.dev/api/v1/graphql to enter the playground
+  description: This is the documentation for the CBV API v1. Navite to https://cbv-api.deno.dev/graphql to enter the playground
   termsOfService: ToDo
   contact:
     name: Bruno Mogetta
@@ -20,5 +20,5 @@ info:
 
 
 servers:
-  - url: https://cbv-api.deno.dev/api/v1/graphql
+  - url: https://cbv-api.deno.dev/graphql
     description: Production
