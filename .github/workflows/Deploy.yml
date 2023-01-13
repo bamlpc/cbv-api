@@ -1,21 +1,22 @@
 name: Deploy
-
-on: push
+on: [push]
 
 jobs:
   deploy:
+    name: Deploy
     runs-on: ubuntu-latest
-    #deno deploy token store in secrets: DENO_DEPLOY_TOKEN
     permissions:
-      id-token: write # This is required to allow the GitHub Action to authenticate with Deno Deploy.
-      contents: read
+      id-token: write # Needed for auth with Deno Deploy
+      contents: read # Needed to clone the repository
 
     steps:
       - name: Clone repository
         uses: actions/checkout@v3
 
-      - name: Deploy to Deno Deploy
+      # TODO: add a build step here
+
+      - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: cbv-api # the name of the project on Deno Deploy
-          entrypoint: mod.ts # the entrypoint to deploy
+          project: "cbv-api"
+          entrypoint: "./mod.ts"
