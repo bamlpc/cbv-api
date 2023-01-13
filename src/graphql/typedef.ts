@@ -26,7 +26,7 @@ const typeDefs = gql`
   type Query {
     find_all_cbv: [StoreCBV],
     find_by_id(_id: String): StoreCBV,
-    find_by_blockchain(blockchain: [String]): StoreCBV,
+    find_by_blockchain(blockchain: [String]): [StoreCBV],
     find_by_cbv_code(id: String): StoreCBV,
   }
   type CBV {
@@ -54,3 +54,4 @@ const typeDefs = gql`
 `;
 
 export { typeDefs };
+
