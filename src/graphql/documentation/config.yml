@@ -1,0 +1,24 @@
+spectaql:
+  displayAllServers: true
+  targetDir: src/graphql/documentation/public
+
+introspection:
+  url: https://cbv-api.deno.dev/graphql
+  fieldExpansionDepth: 3
+
+
+info:
+  title: CBV GraphQL API Reference
+  description: This is the documentation for the CBV API v1. Navite to https://cbv-api.deno.dev/graphql to enter the playground
+  termsOfService: ToDo
+  contact:
+    name: Bruno Mogetta
+    url: https://github.com/BMogetta
+    email: brunomogetta@gmail.com
+  license:
+    name: MIT
+
+
+servers:
+  - url: https://cbv-api.deno.dev/graphql
+    description: Production

@@ -1,0 +1,21 @@
+scripts:
+  start:
+    desc: run mod.ts in development mode
+    cmd: deno run --cached-only  mod.ts 
+    watch: true
+    allow:
+    - net
+    - env
+    - read
+    - write
+    unstable: false
+  debug:
+    desc: enter debug mode
+    cmd: deno run --inspect-brk mod.ts
+    watch: false
+
+logger:
+  interval: 1000,
+  exts: 
+  - ts
+  fullscreen: false
