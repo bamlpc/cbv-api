@@ -19,6 +19,7 @@ const typeDefs = gql`
     labels: String!
     tests: String!
     aditional_comments: String!
+    credits: String!
     created_at: String!
     updated_at: String!
     api_key: String!
@@ -44,6 +45,7 @@ const typeDefs = gql`
     labels: String
     tests: String
     aditional_comments: String
+    credits: String
     created_at: String
     updated_at: String
   }

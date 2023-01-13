@@ -15,6 +15,7 @@ interface CBV {
 	labels: string;
 	tests: string;
 	aditional_comments: string;
+	credits: string;
 	created_at: string;
 	updated_at: string;
 	api_key?: string;
@@ -27,3 +28,4 @@ interface MongoCBVSchema {
 }
 
 export type { CBV, MongoCBVSchema };
+

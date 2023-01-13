@@ -25,6 +25,7 @@ const mongodb_store_cbv = async (
 				labels: _new.labels,
 				tests: _new.tests,
 				aditional_comments: _new.aditional_comments,
+				credits: _new.credits,
 				created_at: _new.created_at,
 				updated_at: _new.updated_at,
 			},
