@@ -58,7 +58,7 @@ async function mongodb_store_cbv (store: Record<string, CBV>): Promise<string> {
 			}
 		}
 		const { _matchedCount, _modifiedCount, upsertedId } = await issues.updateOne(
-			{'cbv.cbv_id': { $in: [store.cbv.cbv_id]},
+			{'cbv.cbv_id': { $in: [store.cbv.cbv_id]}},
 			{$set: _store},
 			{upsert: true}
 			);
