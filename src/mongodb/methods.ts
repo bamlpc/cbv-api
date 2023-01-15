@@ -57,8 +57,12 @@ async function mongodb_store_cbv (store: Record<string, CBV>): Promise<string> {
 				updated_at: _new.updated_at,
 			}
 		}
-		const insert_cbv = await issues.insertOne(_store);
-		return insert_cbv.toString();
+		const { _matchedCount, _modifiedCount, upsertedId } = await issues.updateOne(
+			{'cbv.cbv_id': { $in: [store.cbv.cbv_id]},
+			{$set: _store},
+			{upsert: true}
+			);
+		return upsertedId.toString();
 }
 
 //
