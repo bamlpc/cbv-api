@@ -1,39 +1,7 @@
 import { mongo } from 'deps';
 import { CBV, MongoCBVSchema } from 'schemas';
 import { issues } from './helpers/connection.ts';
-//TODO: serch "error.message" type
 
-//
-/*
-const mongodb_store_cbv = async (
-	store: Record<string, CBV>,
-): Promise<string> => {
-		const _new = store.cbv;
-		const _store = {
-			cbv: {
-				title: _new.title,
-				short_description: _new.short_description,
-				cbv_id: _new.cbv_id,
-				blockchain: _new.blockchain,
-				version_affected: _new.version_affected,
-				component: _new.component,
-				severity: _new.severity,
-				vulnerability_type: _new.vulnerability_type,
-				details: _new.details,
-				recommendation: _new.recommendation,
-				references: _new.references,
-				labels: _new.labels,
-				tests: _new.tests,
-				aditional_comments: _new.aditional_comments,
-				credits: _new.credits,
-				created_at: _new.created_at,
-				updated_at: _new.updated_at,
-			}
-		}
-		const insert_cbv = await issues.insertOne(_store);
-		return insert_cbv.toString();
-};
-*/
 async function mongodb_store_cbv (store: Record<string, CBV>): Promise<string> {
 	const _new = store.cbv;
 		const _store = {
