@@ -56,4 +56,3 @@ const typeDefs = gql`
 `;
 
 export { typeDefs };
-

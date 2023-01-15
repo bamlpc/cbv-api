@@ -26,8 +26,12 @@ const hostname = ENVIRONMENT.URL;
 const port = Number(ENVIRONMENT.PORT);
 const server = new Server({ hostname, port, handler });
 if (ENVIRONMENT.PROD != 'prod') {
-	console.log( `Server running`)
-	console.log( `GraphQL documentation: http://${ENVIRONMENT.URL}:${ENVIRONMENT.PORT}`	)
-	console.log( `GraphQL playground: http://${ENVIRONMENT.URL}:${ENVIRONMENT.PORT}/graphql`	)
+	console.log(`Server running`);
+	console.log(
+		`GraphQL documentation: http://${ENVIRONMENT.URL}:${ENVIRONMENT.PORT}`,
+	);
+	console.log(
+		`GraphQL playground: http://${ENVIRONMENT.URL}:${ENVIRONMENT.PORT}/graphql`,
+	);
 }
 await server.listenAndServe();

@@ -28,4 +28,3 @@ interface MongoCBVSchema {
 }
 
 export type { CBV, MongoCBVSchema };
-

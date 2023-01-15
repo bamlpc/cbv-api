@@ -17,7 +17,7 @@ const ENVIRONMENT = {
 
 const API_KEY = [
 	Deno.env.get('API_KEY_1') || 'API_KEY_1',
-	Deno.env.get('API_KEY_2') || 'API_KEY_2'
-]
+	Deno.env.get('API_KEY_2') || 'API_KEY_2',
+];
 
 export { API_KEY, ENVIRONMENT, MONGODB };
