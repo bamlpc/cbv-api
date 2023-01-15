@@ -7,9 +7,7 @@ import { issues } from './helpers/connection.ts';
 const mongodb_store_cbv = async (
 	store: Record<string, CBV>,
 ): Promise<string> => {
-	try {
 		const _new = store.cbv;
-		/*
 		const insert_cbv = await issues.insertOne({
 			cbv: {
 				title: _new.title,
@@ -30,42 +28,8 @@ const mongodb_store_cbv = async (
 				created_at: _new.created_at,
 				updated_at: _new.updated_at,
 			},
-		});*/
-		const { _matchedCount, _modifiedCount, upsertedId } = await issues
-			.updateOne(
-				{ 'cbv.cbv_id': { $in: [_new.cbv_id] } },
-				{
-					$set: {
-						cbv: {
-							title: _new.title,
-							short_description: _new.short_description,
-							cbv_id: _new.cbv_id,
-							blockchain: _new.blockchain,
-							version_affected: _new.version_affected,
-							component: _new.component,
-							severity: _new.severity,
-							vulnerability_type: _new.vulnerability_type,
-							details: _new.details,
-							recommendation: _new.recommendation,
-							references: _new.references,
-							labels: _new.labels,
-							tests: _new.tests,
-							aditional_comments: _new.aditional_comments,
-							credits: _new.credits,
-							created_at: _new.created_at,
-							updated_at: _new.updated_at,
-						},
-					},
-				},
-				{
-					$upsert: true,
-					noCursorTimeout: false,
-				},
-			);
-		return upsertedId.toString();
-	} catch (error) {
-		return error.message;
-	}
+		});
+		return insert_cbv.toString();
 };
 
 //
@@ -152,3 +116,4 @@ export {
 	mongodb_find_with_labels,
 	mongodb_store_cbv,
 };
+
