@@ -23,8 +23,7 @@ const handler = async (request: Request) => {
 	}
 };
 
-const handlerWithCorse = withCors(handler, {
-  allowOrigin: "*",})
+const handlerWithCorse = withCors(handler)
 const hostname = ENVIRONMENT.URL;
 const port = Number(ENVIRONMENT.PORT);
 const server = new Server({ hostname, port, handlerWithCorse });
