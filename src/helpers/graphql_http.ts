@@ -5,9 +5,6 @@ import {
 import { renderPlaygroundPage } from 'https://deno.land/x/gql@1.1.1/graphiql/render.ts';
 import type { GQLRequest } from 'https://deno.land/x/gql@1.1.1/types.ts';
 
-// !!! all code below is from https://deno.land/x/gql@1.1.1/http.ts
-// except for removal of dynamic import
-
 /**
  * Create a new GraphQL HTTP middleware with schema, context etc
  * @param {GQLOptions} options
@@ -30,11 +27,6 @@ export function GraphQLHTTP<
 	return async (request: Req) => {
 		if (options.graphiql && request.method === 'GET') {
 			if (request.headers.get('Accept')?.includes('text/html')) {
-				// !!! only modified portion is here
-				// const { renderPlaygroundPage } = await import(
-				// 	"./graphiql/render.ts"
-				// );
-				// !!! end of modified portion
 				const playground = renderPlaygroundPage({
 					...playgroundOptions,
 					endpoint: '/graphql',

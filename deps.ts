@@ -14,3 +14,4 @@ export * as mongo from 'third/mongo@v0.31.1/mod.ts';
 export { gql } from 'third/graphql_tag@0.0.1/mod.ts';
 export { GraphQLHTTP } from 'third/gql@1.1.0/mod.ts';
 export { makeExecutableSchema } from 'third/graphql_tools@0.0.2/mod.ts';
+export { withCors } from "third/cors_protocol@1.0.0-beta.5/mod.ts";

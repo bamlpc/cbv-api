@@ -1,4 +1,4 @@
-import { makeExecutableSchema, serveDir, Server } from 'deps';
+import { makeExecutableSchema, serveDir, Server, withCors } from 'deps';
 import { GraphQLHTTP } from './src/helpers/graphql_http.ts';
 
 import { ENVIRONMENT } from 'environment';
@@ -22,9 +22,12 @@ const handler = async (request: Request) => {
 		return _static;
 	}
 };
+
+const handlerWithCorse = withCors(handler, {
+  allowOrigin: "*",})
 const hostname = ENVIRONMENT.URL;
 const port = Number(ENVIRONMENT.PORT);
-const server = new Server({ hostname, port, handler });
+const server = new Server({ hostname, port, handlerWithCorse });
 if (ENVIRONMENT.PROD != 'prod') {
 	console.log(`Server running`);
 	console.log(
