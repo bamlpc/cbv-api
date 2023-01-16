@@ -1,11 +1,11 @@
-import { makeExecutableSchema, serveDir, Server, withCors } from 'deps';
+import { makeExecutableSchema, serveDir, Server, withCors, serve } from 'deps';
 import { GraphQLHTTP } from './src/helpers/graphql_http.ts';
 
 import { ENVIRONMENT } from 'environment';
 import { resolvers } from './src/graphql/resolvers.ts';
 import { typeDefs } from './src/graphql/typedef.ts';
 
-const handler = async (request: Request) => {
+async function handler(request: Request) {
 	const { pathname } = new URL(request.url);
 
 	if (pathname === '/graphql') {
@@ -23,7 +23,8 @@ const handler = async (request: Request) => {
 	}
 };
 
-const handlerWithCorse = withCors(handler)
+await serve(withCors(handler))
+/*
 const hostname = ENVIRONMENT.URL;
 const port = Number(ENVIRONMENT.PORT);
 const server = new Server({ hostname, port, handler});
@@ -37,3 +38,4 @@ if (ENVIRONMENT.PROD != 'prod') {
 	);
 }
 await server.listenAndServe();
+*/
