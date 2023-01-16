@@ -26,7 +26,7 @@ const handler = async (request: Request) => {
 const handlerWithCorse = withCors(handler)
 const hostname = ENVIRONMENT.URL;
 const port = Number(ENVIRONMENT.PORT);
-const server = new Server({ hostname, port, handlerWithCorse });
+const server = new Server({ hostname, port, handler});
 if (ENVIRONMENT.PROD != 'prod') {
 	console.log(`Server running`);
 	console.log(
