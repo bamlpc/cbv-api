@@ -6,6 +6,7 @@ import { typeDefs } from './src/graphql/typedef.ts';
 
 async function handler(request: Request) {
 	const { pathname } = new URL(request.url);
+
 	if (pathname === '/graphql') {
 		const graphql = await GraphQLHTTP<Request>({
 			schema: makeExecutableSchema({ resolvers, typeDefs }),
@@ -20,6 +21,10 @@ async function handler(request: Request) {
 		return _static;
 	}
 };
+
+withCors(() => new Response(), {
+  allowOrigin: "*",
+});
 
 await serve(withCors(handler))
 /*
