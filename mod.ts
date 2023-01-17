@@ -12,8 +12,7 @@ async function handler(request: Request) {
 			schema: makeExecutableSchema({ resolvers, typeDefs }),
 			graphiql: true,
 		})(request);
-		const debug = await graphql.body?.getReader();
-		console.debug(debug)
+		console.debug(graphql)
 		return graphql;
 	} else {
 		const static_root = './src/graphql/documentation/public';
