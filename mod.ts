@@ -1,7 +1,6 @@
-import { makeExecutableSchema, serveDir, Server, withCors, serve } from 'deps';
+import { makeExecutableSchema, serve, serveDir, withCors } from 'deps';
 import { GraphQLHTTP } from './src/helpers/graphql_http.ts';
 
-import { ENVIRONMENT } from 'environment';
 import { resolvers } from './src/graphql/resolvers.ts';
 import { typeDefs } from './src/graphql/typedef.ts';
 
@@ -13,6 +12,7 @@ async function handler(request: Request) {
 			schema: makeExecutableSchema({ resolvers, typeDefs }),
 			graphiql: true,
 		})(request);
+		console.debug(request)
 		return graphql;
 	} else {
 		const static_root = './src/graphql/documentation/public';
