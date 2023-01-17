@@ -1,38 +1,38 @@
-import { makeExecutableSchema, serve, serveDir, withCors } from 'deps';
+import { Application, makeExecutableSchema, oakCors, Router, send } from 'deps';
 import { GraphQLHTTP } from './src/helpers/graphql_http.ts';
 
 import { ENVIRONMENT } from 'environment';
 import { resolvers } from './src/graphql/resolvers.ts';
 import { typeDefs } from './src/graphql/typedef.ts';
 
-async function handler(request: Request) {
-	const { pathname } = new URL(request.url);
 
-	if (pathname === '/graphql') {
+const books = new Map<string, any>();
+books.set("1", {
+  id: "1",
+  title: "Frankenstein",
+  author: "Mary Shelley",
+});
+
+const router = new Router();
+router
+  .get("/", async (context) => {
+    await send(context, context.request.url.pathname, {
+      root: `${Deno.cwd()}/src/graphql/documentation/public`,
+      index: "index.html",
+    });
+  })
+  .get("/graphql", async (context) => {
 		const graphql = await GraphQLHTTP<Request>({
 			schema: makeExecutableSchema({ resolvers, typeDefs }),
 			graphiql: true,
-		})(request);
-		return graphql;
-	} else {
-		const static_root = './src/graphql/documentation/public';
-		const _static = serveDir(request, {
-			fsRoot: static_root,
-		});
-		return _static;
-	}
-};
+		})(context.request);
+    context.response = graphql
+  })
+  .redirect("/*", "/");
 
-withCors(() => new Response(), {
-  allowOrigin: "*",
-	allowMethods: "GET, POST",
-});
-withCors(() => new Response(), {
-  allowOrigin: (context) => {
-    const origin = context.request.headers.get("origin")!;
-    return /https?:\/\/api.test.test/.test(origin) ? origin : "null";
-  },
-});
+const app = new Application();
+app.use(oakCors()); // Enable CORS for All Routes
+app.use(router.routes());
 
 if (ENVIRONMENT.PROD != 'prod') {
 	console.log(`Server running`);
@@ -43,8 +43,4 @@ if (ENVIRONMENT.PROD != 'prod') {
 		`GraphQL playground: http://${ENVIRONMENT.URL}:${ENVIRONMENT.PORT}/graphql`,
 	);
 }
-
-await serve(withCors(handler))
-/*
-await server.listenAndServe();
-*/
+await app.listen({ port: ENVIRONMENT.PORT });
