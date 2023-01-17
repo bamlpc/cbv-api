@@ -21,7 +21,9 @@ async function handler(request: Request) {
 	}
 };
 
-await serve(withCors(handler))
+await serve(withCors(handler, {
+  allowOrigin: "*",
+}))
 /*
 const hostname = ENVIRONMENT.URL;
 const port = Number(ENVIRONMENT.PORT);
