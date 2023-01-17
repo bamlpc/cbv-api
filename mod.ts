@@ -13,8 +13,8 @@ async function handler(request: Request) {
 			graphiql: true,
 		})(request);
 		console.debug(request)
-		console.debug(request.body)
-		console.debug(graphql)
+		console.debug(request.body )
+		console.debug(graphql.json())
 		return graphql;
 	} else {
 		const static_root = './src/graphql/documentation/public';
