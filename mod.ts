@@ -6,13 +6,13 @@ import { typeDefs } from './src/graphql/typedef.ts';
 
 async function handler(request: Request) {
 	const { pathname } = new URL(request.url);
-
+	console.debug(request.json())
 	if (pathname === '/graphql') {
 		const graphql = await GraphQLHTTP<Request>({
 			schema: makeExecutableSchema({ resolvers, typeDefs }),
 			graphiql: true,
 		})(request);
-		console.debug(request)
+		console.debug(graphql.json())
 		return graphql;
 	} else {
 		const static_root = './src/graphql/documentation/public';
