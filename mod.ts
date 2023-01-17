@@ -1,46 +1,50 @@
-import { Application, makeExecutableSchema, oakCors, Router, send } from 'deps';
+import { makeExecutableSchema, serveDir, withCors, serve } from 'deps';
 import { GraphQLHTTP } from './src/helpers/graphql_http.ts';
 
 import { ENVIRONMENT } from 'environment';
 import { resolvers } from './src/graphql/resolvers.ts';
 import { typeDefs } from './src/graphql/typedef.ts';
 
-
-const books = new Map<string, any>();
-books.set("1", {
-  id: "1",
-  title: "Frankenstein",
-  author: "Mary Shelley",
-});
-
-const router = new Router();
-router
-  .get("/", async (context) => {
-    await send(context, context.request.url.pathname, {
-      root: `${Deno.cwd()}/src/graphql/documentation/public`,
-      index: "index.html",
-    });
-  })
-  .get("/graphql", async (context) => {
-		const graphql = await GraphQLHTTP<Request>({
-			schema: makeExecutableSchema({ resolvers, typeDefs }),
-			graphiql: true,
-		})(context.request);
-    context.response = graphql
-  })
-  .redirect("/*", "/");
-
-const app = new Application();
-app.use(oakCors()); // Enable CORS for All Routes
-app.use(router.routes());
+// dev log while running server
+const hostname = ENVIRONMENT.URL;
+const port = Number(ENVIRONMENT.PORT);
 
 if (ENVIRONMENT.PROD != 'prod') {
 	console.log(`Server running`);
 	console.log(
-		`GraphQL documentation: http://${ENVIRONMENT.URL}:${ENVIRONMENT.PORT}`,
+		`GraphQL documentation: ${hostname}:${port}`,
 	);
 	console.log(
-		`GraphQL playground: http://${ENVIRONMENT.URL}:${ENVIRONMENT.PORT}/graphql`,
+		`GraphQL playground: ${hostname}:${port}/graphql`,
 	);
 }
-await app.listen({ port: ENVIRONMENT.PORT });
+// server
+async function handler(request: Request) {
+	const { pathname } = new URL(request.url);
+
+	if (pathname === '/graphql') {
+		const graphql = await GraphQLHTTP<Request>({
+			schema: makeExecutableSchema({ resolvers, typeDefs }),
+			graphiql: true,
+		})(request);
+		return graphql;
+	} else {
+		const static_root = './src/graphql/documentation/public';
+		const _static = serveDir(request, {
+			fsRoot: static_root,
+		});
+		return _static;
+	}
+};
+
+withCors(() => new Response(), {
+  allowOrigin: "*",
+});/*
+withCors(() => new Response(), {
+  allowOrigin: (context) => {
+    const origin = context.request.headers.get("origin")!;
+    return /https?:\/\/api.test.test/.test(origin) ? origin : "null";
+  },
+});
+*/
+await serve(withCors(handler))
