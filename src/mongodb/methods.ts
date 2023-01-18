@@ -116,6 +116,15 @@ const mongodb_find_with_search_string = async (input: Record<string, string>): P
 	}
 };
 
+const mongodb_find_by_latest = async (input: Record<string, string>): Promise<Array<MongoCBVSchema>> => {
+	try {
+		const find_by_latest = await issues.find({}, { noCursorTimeout: false }).limit(Number(input.number)).sort({$natural:-1});
+		return find_by_latest.toArray();
+	} catch (error) {
+		return error.message;
+	}
+};
+
 // TODO: filter by latest added will require to store timestamps as a number a search for the biggest ones, alternative create a second collection that contains an array of the requiere lenght (i.e. 10), and push / pop in that array on every new save on issues collection
 
 export {
@@ -125,5 +134,6 @@ export {
 	mongodb_find_by_id,
 	mongodb_find_with_labels,
 	mongodb_store_cbv,
-	mongodb_find_with_search_string
+	mongodb_find_with_search_string,
+	mongodb_find_by_latest
 };
