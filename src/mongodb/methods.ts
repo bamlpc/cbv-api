@@ -1,5 +1,5 @@
 import { mongo } from 'deps';
-import { CBV, MongoCBVSchema, Issue } from 'schemas';
+import { MongoCBVSchema, Issue } from 'schemas';
 import { issues } from './helpers/connection.ts';
 import { getSeverity } from './helpers/functions.ts'
 
@@ -126,11 +126,18 @@ const mongodb_find_with_time_frame = async (input: Record<string, Record<string,
 		const find_with_time_frame = await issues.find({ timestamp: { $gte: input.timeframe.start, $lt: input.timeframe.end } })
 		return find_with_time_frame.toArray()
 	} catch (error) {
+	return error.message;
+}
+}
+
+const mongodb_find_by_latest = async (input: Record<string, string>): Promise<Array<MongoCBVSchema>> => {
+	try {
+		const find_by_latest = await issues.find({}, { noCursorTimeout: false }).limit(Number(input.number)).sort({$natural:-1});
+		return find_by_latest.toArray();
+	} catch (error) {
 		return error.message;
 	}
 };
-
-
 
 // TODO: filter by latest added will require to store timestamps as a number a search for the biggest ones, alternative create a second collection that contains an array of the requiere lenght (i.e. 10), and push / pop in that array on every new save on issues collection
 
@@ -142,5 +149,6 @@ export {
 	mongodb_find_with_labels,
 	mongodb_store_cbv,
 	mongodb_find_with_search_string,
-	mongodb_find_with_time_frame
+	mongodb_find_with_time_frame,
+	mongodb_find_by_latest
 };
