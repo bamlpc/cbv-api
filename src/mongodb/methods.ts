@@ -1,9 +1,10 @@
 import { mongo } from 'deps';
-import { CBV, MongoCBVSchema } from 'schemas';
+import { CBV, MongoCBVSchema, Issue } from 'schemas';
 import { issues } from './helpers/connection.ts';
+import { getSeverity } from './helpers/functions.ts'
 
-async function mongodb_store_cbv(store: Record<string, CBV>): Promise<string> {
-	const _new = store.cbv;
+async function mongodb_store_cbv(store: Record<string, Issue>): Promise<string> {
+	const _new = store.issue.cbv;
 	const _store = {
 		cbv: {
 			title: _new.title,
@@ -12,7 +13,8 @@ async function mongodb_store_cbv(store: Record<string, CBV>): Promise<string> {
 			blockchain: _new.blockchain,
 			version_affected: _new.version_affected,
 			component: _new.component,
-			severity: _new.severity,
+			severity: getSeverity(_new.severity),
+			score: _new.severity,
 			vulnerability_type: _new.vulnerability_type,
 			details: _new.details,
 			recommendation: _new.recommendation,
@@ -24,13 +26,14 @@ async function mongodb_store_cbv(store: Record<string, CBV>): Promise<string> {
 			created_at: _new.created_at,
 			updated_at: _new.updated_at,
 		},
+		timestamp: new Date().getTime()
 	};
 	const { _matchedCount, _modifiedCount, upsertedId } = await issues.updateOne(
-		{ 'cbv.cbv_id': { $in: [store.cbv.cbv_id] } },
+		{ 'cbv.cbv_id': { $in: [store.issue.cbv.cbv_id] } },
 		{ $set: _store },
 		{ upsert: true },
 	);
-	return upsertedId.toString();
+	return upsertedId!.toString();
 }
 
 //
@@ -116,6 +119,19 @@ const mongodb_find_with_search_string = async (input: Record<string, string>): P
 	}
 };
 
+const mongodb_find_with_time_frame = async (input: Record<string, Record<string, number>>): Promise<Array<MongoCBVSchema>> => {
+	if (!input.timeframe.start) input.timeframe.start = new Date(2023, 11, 1).getTime()
+	if (!input.timeframe.end) input.timeframe.end = new Date().getTime()
+	try {
+		const find_with_time_frame = await issues.find({ timestamp: { $gte: input.timeframe.start, $lt: input.timeframe.end } })
+		return find_with_time_frame.toArray()
+	} catch (error) {
+		return error.message;
+	}
+};
+
+
+
 // TODO: filter by latest added will require to store timestamps as a number a search for the biggest ones, alternative create a second collection that contains an array of the requiere lenght (i.e. 10), and push / pop in that array on every new save on issues collection
 
 export {
@@ -125,5 +141,6 @@ export {
 	mongodb_find_by_id,
 	mongodb_find_with_labels,
 	mongodb_store_cbv,
-	mongodb_find_with_search_string
+	mongodb_find_with_search_string,
+	mongodb_find_with_time_frame
 };

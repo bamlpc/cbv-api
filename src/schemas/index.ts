@@ -1,5 +1,10 @@
 import { mongo } from 'deps';
 
+interface Issue {
+	cbv: CBV;
+	timestamp: number;
+}
+
 interface CBV {
 	title: string;
 	short_description: string;
@@ -27,4 +32,4 @@ interface MongoCBVSchema {
 	cbv: CBV;
 }
 
-export type { CBV, MongoCBVSchema };
+export type { CBV, MongoCBVSchema, Issue };

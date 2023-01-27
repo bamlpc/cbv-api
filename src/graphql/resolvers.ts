@@ -1,10 +1,11 @@
-import { CBV } from 'schemas';
+import { Issue } from 'schemas';
 import {
 	mongodb_find_all_cbv,
 	mongodb_find_by_blockchain,
 	mongodb_find_by_cbv_code,
 	mongodb_find_by_id,
 	mongodb_find_with_search_string,
+	mongodb_find_with_time_frame
 } from '../mongodb/methods.ts';
 import { store_cbv_with_credentials } from '../helpers/graphql_post_handler.ts';
 const resolvers = {
@@ -21,10 +22,13 @@ const resolvers = {
 		// deno-lint-ignore no-explicit-any
 		find_by_cbv_code: (_root: any, args: Record<string, string>) =>
 			mongodb_find_by_cbv_code(args),
+		// deno-lint-ignore no-explicit-any
+		find_with_time_frame: (_root: any, args: Record<string, Record<string, number>>) =>
+			mongodb_find_with_time_frame(args),
 	},
 	Mutation: {
 		// deno-lint-ignore no-explicit-any
-		store_cbv: (_root: any, args: Record<string, CBV>) =>
+		store_cbv: (_root: any, args: Record<string, Issue>) =>
 			store_cbv_with_credentials(args),
 	},
 };
