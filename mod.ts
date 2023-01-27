@@ -1,4 +1,4 @@
-import { makeExecutableSchema, serveDir, withCors, serve } from 'deps';
+import { makeExecutableSchema, serve, serveDir, withCors } from 'deps';
 import { GraphQLHTTP } from './src/helpers/graphql_http.ts';
 
 import { ENVIRONMENT } from 'environment';
@@ -35,11 +35,11 @@ async function handler(request: Request) {
 		});
 		return _static;
 	}
-};
+}
 
 withCors(() => new Response(), {
-  allowOrigin: "*",
-});/*
+	allowOrigin: '*',
+}); /*
 withCors(() => new Response(), {
   allowOrigin: (context) => {
     const origin = context.request.headers.get("origin")!;
@@ -47,4 +47,5 @@ withCors(() => new Response(), {
   },
 });
 */
-await serve(withCors(handler))
+
+await serve(withCors(handler));

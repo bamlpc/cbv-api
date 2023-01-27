@@ -1,7 +1,7 @@
 import { mongo } from 'deps';
-import { MongoCBVSchema, CBV } from 'schemas';
+import { CBV, MongoCBVSchema } from 'schemas';
 import { issues } from './helpers/connection.ts';
-import { getSeverity } from './helpers/functions.ts'
+import { getSeverity } from './helpers/functions.ts';
 
 async function mongodb_store_cbv(store: Record<string, CBV>): Promise<string> {
 	const _new = store.cbv;
@@ -27,7 +27,7 @@ async function mongodb_store_cbv(store: Record<string, CBV>): Promise<string> {
 			created_at: _new.created_at,
 			updated_at: _new.updated_at,
 		},
-		timestamp: new Date().getTime()
+		timestamp: new Date().getTime(),
 	};
 	// deno-lint-ignore no-unused-vars
 	const { matchedCount, modifiedCount, upsertedId } = await issues.updateOne(
@@ -112,29 +112,42 @@ const mongodb_find_all_cbv = async (): Promise<Array<MongoCBVSchema>> => {
 	}
 };
 
-const mongodb_find_with_search_string = async (input: Record<string, string>): Promise<Array<MongoCBVSchema>> => {
+const mongodb_find_with_search_string = async (
+	input: Record<string, string>,
+): Promise<Array<MongoCBVSchema>> => {
 	try {
-		const find_with_search_string = await issues.find({ $text: { $search: input.search_string } }, { noCursorTimeout: false });
+		const find_with_search_string = await issues.find({
+			$text: { $search: input.search_string },
+		}, { noCursorTimeout: false });
 		return find_with_search_string.toArray();
 	} catch (error) {
 		return error.message;
 	}
 };
 
-const mongodb_find_with_time_frame = async (input: Record<string, Record<string, number>>): Promise<Array<MongoCBVSchema>> => {
-	if (!input.timeframe.start) input.timeframe.start = new Date(2023, 11, 1).getTime()
-	if (!input.timeframe.end) input.timeframe.end = new Date().getTime()
+const mongodb_find_with_time_frame = async (
+	input: Record<string, Record<string, number>>,
+): Promise<Array<MongoCBVSchema>> => {
+	if (!input.timeframe.start) {
+		input.timeframe.start = new Date(2023, 11, 1).getTime();
+	}
+	if (!input.timeframe.end) input.timeframe.end = new Date().getTime();
 	try {
-		const find_with_time_frame = await issues.find({ timestamp: { $gte: input.timeframe.start, $lt: input.timeframe.end } }, { noCursorTimeout: false })
-		return find_with_time_frame.toArray()
+		const find_with_time_frame = await issues.find({
+			timestamp: { $gte: input.timeframe.start, $lt: input.timeframe.end },
+		}, { noCursorTimeout: false });
+		return find_with_time_frame.toArray();
 	} catch (error) {
-	return error.message;
-}
-}
+		return error.message;
+	}
+};
 
-const mongodb_find_by_latest = async (input: Record<string, string>): Promise<Array<MongoCBVSchema>> => {
+const mongodb_find_by_latest = async (
+	input: Record<string, string>,
+): Promise<Array<MongoCBVSchema>> => {
 	try {
-		const find_by_latest = await issues.find({}, { noCursorTimeout: false }).limit(Number(input.number)).sort({$natural:-1});
+		const find_by_latest = await issues.find({}, { noCursorTimeout: false })
+			.limit(Number(input.number)).sort({ $natural: -1 });
 		return find_by_latest.toArray();
 	} catch (error) {
 		return error.message;
@@ -148,9 +161,9 @@ export {
 	mongodb_find_by_blockchain,
 	mongodb_find_by_cbv_code,
 	mongodb_find_by_id,
+	mongodb_find_by_latest,
 	mongodb_find_with_labels,
-	mongodb_store_cbv,
 	mongodb_find_with_search_string,
 	mongodb_find_with_time_frame,
-	mongodb_find_by_latest
+	mongodb_store_cbv,
 };

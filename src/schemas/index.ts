@@ -32,4 +32,4 @@ interface MongoCBVSchema {
 	cbv: CBV;
 }
 
-export type { CBV, MongoCBVSchema, Issue };
+export type { CBV, Issue, MongoCBVSchema };

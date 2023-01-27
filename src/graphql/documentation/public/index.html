@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html class="no-js" lang="en">
   <head>
     <meta charset="utf-8" />
@@ -11,7 +11,8 @@
     <div id="page" class="drawer-layout">
       <div id="sidebar">
         <div class="sidebar-top-container">
-          <div id="logo"></div>
+          <div id="logo">
+          </div>
           <button class="close-button" type="button">
             <span aria-hidden="true">×</span>
             <span class="sr-only">Close menu</span>
@@ -33,13 +34,12 @@
                 </h5>
                 <ul class="nav-group-section-items">
                   <li><a href="#query-find_all_cbv">find_all_cbv</a></li>
-                  <li>
-                    <a href="#query-find_by_blockchain">find_by_blockchain</a>
-                  </li>
-                  <li>
-                    <a href="#query-find_by_cbv_code">find_by_cbv_code</a>
-                  </li>
+                  <li><a href="#query-find_by_blockchain">find_by_blockchain</a></li>
+                  <li><a href="#query-find_by_cbv_code">find_by_cbv_code</a></li>
                   <li><a href="#query-find_by_id">find_by_id</a></li>
+                  <li><a href="#query-find_by_latest">find_by_latest</a></li>
+                  <li><a href="#query-find_by_search_string">find_by_search_string</a></li>
+                  <li><a href="#query-find_with_time_frame">find_with_time_frame</a></li>
                 </ul>
               </li>
               <li class="nav-group-section">
@@ -58,6 +58,8 @@
             <ul class="nav-group-items">
               <li><a href="#definition-Boolean">Boolean</a></li>
               <li><a href="#definition-CBV">CBV</a></li>
+              <li><a href="#definition-Float">Float</a></li>
+              <li><a href="#definition-SearchByTimeFrame">SearchByTimeFrame</a></li>
               <li><a href="#definition-StoreCBV">StoreCBV</a></li>
               <li><a href="#definition-String">String</a></li>
               <li><a href="#definition-toBeStoreCBV">toBeStoreCBV</a></li>
@@ -77,23 +79,13 @@
           <div id="introduction" data-traverse-target="introduction">
             <div id="welcome" class="doc-row">
               <div class="doc-copy">
-                <p>
-                  This is the documentation for the CBV API v1. Navite to
-                  <a href="https://cbv-api.deno.dev/graphql"
-                    >https://cbv-api.deno.dev/graphql</a
-                  >
-                  to enter the playground
-                </p>
+                <p>This is the documentation for the CBV API v1. Navite to <a href="https://cbv-api.deno.dev/graphql">https://cbv-api.deno.dev/graphql</a> to enter the playground</p>
               </div>
               <div class="doc-examples">
                 <div class="example-section welcome-contact-section">
                   <h5>Contact</h5>
                   <p class="contact-name">Bruno Mogetta</p>
-                  <p class="contact-email">
-                    <a href="mailto:brunomogetta@gmail.com"
-                      >brunomogetta@gmail.com</a
-                    >
-                  </p>
+                  <p class="contact-email"><a href="mailto:brunomogetta@gmail.com">brunomogetta@gmail.com</a></p>
                 </div>
                 <div class="example-section welcome-license-section">
                   <h5>License</h5>
@@ -103,9 +95,7 @@
                   <h5>Terms of Service</h5>
                   <p><a href="ToDo">ToDo</a></p>
                 </div>
-                <div
-                  class="example-section welcome-api-endpoints-section example-section-is-code"
-                >
+                <div class="example-section welcome-api-endpoints-section example-section-is-code">
                   <h5>API Endpoints</h5>
                   <pre><code># Production:
 https://cbv-api.deno.dev/graphql
@@ -114,41 +104,26 @@ https://cbv-api.deno.dev/graphql
               </div>
             </div>
           </div>
-          <h1
-            id="group-Operations-Queries"
-            class="group-heading"
-            data-traverse-target="group-Operations-Queries"
-          >
-            Queries
-          </h1>
-          <section
-            id="query-find_all_cbv"
-            class="operation operation-query"
-            data-traverse-target="query-find_all_cbv"
-          >
-            <h2 class="operation-heading">
+          <h1 id="group-Operations-Queries" class="group-heading" data-traverse-target="group-Operations-Queries">Queries</h1>
+          <section id="query-find_all_cbv" class="operation operation-query" data-traverse-target="query-find_all_cbv">
+            <h2 class="operation-heading ">
               <code>find_all_cbv</code>
             </h2>
             <div class="doc-row">
               <div class="doc-copy">
                 <div class="operation-response doc-copy-section">
                   <h5>Response</h5>
-                  <p>
-                    Returns
-                    <a href="#definition-StoreCBV"><code>[StoreCBV]</code></a>
+                  <p> Returns <a href="#definition-StoreCBV"><code>[StoreCBV]</code></a>
                   </p>
                 </div>
               </div>
               <div class="doc-examples">
                 <h4 class="example-heading">Example</h4>
-                <div
-                  class="example-section example-section-is-code operation-query-example"
-                >
+                <div class="example-section example-section-is-code operation-query-example">
                   <h5>Query</h5>
                   <html>
                     <head></head>
-                    <body>
-                      <pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> find_all_cbv <span class="hljs-tag">{
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> find_all_cbv <span class="hljs-tag">{
   <span class="hljs-symbol">find_all_cbv <span class="hljs-tag">{
     <span class="hljs-symbol">_id</span>
     <span class="hljs-symbol">cbv <span class="hljs-tag">{
@@ -159,6 +134,7 @@ https://cbv-api.deno.dev/graphql
       <span class="hljs-symbol">version_affected</span>
       <span class="hljs-symbol">component</span>
       <span class="hljs-symbol">severity</span>
+      <span class="hljs-symbol">score</span>
       <span class="hljs-symbol">vulnerability_type</span>
       <span class="hljs-symbol">details</span>
       <span class="hljs-symbol">recommendation</span>
@@ -166,28 +142,28 @@ https://cbv-api.deno.dev/graphql
       <span class="hljs-symbol">labels</span>
       <span class="hljs-symbol">tests</span>
       <span class="hljs-symbol">aditional_comments</span>
+      <span class="hljs-symbol">credits</span>
       <span class="hljs-symbol">created_at</span>
       <span class="hljs-symbol">updated_at</span>
     }</span></span>
+    <span class="hljs-symbol">timestamp</span>
   }</span></span>
 }</span></span>
 </code></pre>
                     </body>
                   </html>
                 </div>
-                <div
-                  class="example-section example-section-is-code operation-response-example"
-                >
+                <div class="example-section example-section-is-code operation-response-example">
                   <h5>Response</h5>
                   <html>
                     <head></head>
-                    <body>
-                      <pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
     <span class="hljs-attr">"find_all_cbv"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
       <span class="hljs-punctuation">{</span>
-        <span class="hljs-attr">"_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-        <span class="hljs-attr">"cbv"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">CBV</span>
+        <span class="hljs-attr">"_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"cbv"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">CBV</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"timestamp"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123.45</span>
       <span class="hljs-punctuation">}</span>
     <span class="hljs-punctuation">]</span>
   <span class="hljs-punctuation">}</span>
@@ -199,24 +175,18 @@ https://cbv-api.deno.dev/graphql
               </div>
             </div>
           </section>
-          <section
-            id="query-find_by_blockchain"
-            class="operation operation-query"
-            data-traverse-target="query-find_by_blockchain"
-          >
+          <section id="query-find_by_blockchain" class="operation operation-query" data-traverse-target="query-find_by_blockchain">
             <div class="operation-group-name">
               <a href="#group-Operations-Queries">Queries</a>
             </div>
-            <h2 class="operation-heading">
+            <h2 class="operation-heading ">
               <code>find_by_blockchain</code>
             </h2>
             <div class="doc-row">
               <div class="doc-copy">
                 <div class="operation-response doc-copy-section">
                   <h5>Response</h5>
-                  <p>
-                    Returns
-                    <a href="#definition-StoreCBV"><code>[StoreCBV]</code></a>
+                  <p> Returns <a href="#definition-StoreCBV"><code>[StoreCBV]</code></a>
                   </p>
                 </div>
                 <div class="operation-arguments doc-copy-section">
@@ -231,17 +201,10 @@ https://cbv-api.deno.dev/graphql
                     <tbody>
                       <tr>
                         <td>
-                          <span class="property-name"
-                            ><code>blockchain</code></span
-                          >
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>[String]</code></a
-                            ></span
-                          >
+                          <span class="property-name"><code>blockchain</code></span> - <span class="property-type"><a href="#definition-String"><code>[String]</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -249,14 +212,11 @@ https://cbv-api.deno.dev/graphql
               </div>
               <div class="doc-examples">
                 <h4 class="example-heading">Example</h4>
-                <div
-                  class="example-section example-section-is-code operation-query-example"
-                >
+                <div class="example-section example-section-is-code operation-query-example">
                   <h5>Query</h5>
                   <html>
                     <head></head>
-                    <body>
-                      <pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> find_by_blockchain<span class="hljs-tag">(<span class="hljs-code">$blockchain</span>: <span class="hljs-type">[String]</span>)</span> <span class="hljs-tag">{
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> find_by_blockchain<span class="hljs-tag">(<span class="hljs-code">$blockchain</span>: <span class="hljs-type">[String]</span>)</span> <span class="hljs-tag">{
   <span class="hljs-symbol">find_by_blockchain<span class="hljs-tag">(blockchain: <span class="hljs-code">$blockchain</span>)</span> <span class="hljs-tag">{
     <span class="hljs-symbol">_id</span>
     <span class="hljs-symbol">cbv <span class="hljs-tag">{
@@ -267,6 +227,7 @@ https://cbv-api.deno.dev/graphql
       <span class="hljs-symbol">version_affected</span>
       <span class="hljs-symbol">component</span>
       <span class="hljs-symbol">severity</span>
+      <span class="hljs-symbol">score</span>
       <span class="hljs-symbol">vulnerability_type</span>
       <span class="hljs-symbol">details</span>
       <span class="hljs-symbol">recommendation</span>
@@ -274,40 +235,37 @@ https://cbv-api.deno.dev/graphql
       <span class="hljs-symbol">labels</span>
       <span class="hljs-symbol">tests</span>
       <span class="hljs-symbol">aditional_comments</span>
+      <span class="hljs-symbol">credits</span>
       <span class="hljs-symbol">created_at</span>
       <span class="hljs-symbol">updated_at</span>
     }</span></span>
+    <span class="hljs-symbol">timestamp</span>
   }</span></span>
 }</span></span>
 </code></pre>
                     </body>
                   </html>
                 </div>
-                <div
-                  class="example-section example-section-is-code operation-variables-example"
-                >
+                <div class="example-section example-section-is-code operation-variables-example">
                   <h5>Variables</h5>
                   <html>
                     <head></head>
-                    <body>
-                      <pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"blockchain"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">}</span>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"blockchain"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"abc123"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
                   </html>
                 </div>
-                <div
-                  class="example-section example-section-is-code operation-response-example"
-                >
+                <div class="example-section example-section-is-code operation-response-example">
                   <h5>Response</h5>
                   <html>
                     <head></head>
-                    <body>
-                      <pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
     <span class="hljs-attr">"find_by_blockchain"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
       <span class="hljs-punctuation">{</span>
-        <span class="hljs-attr">"_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-        <span class="hljs-attr">"cbv"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">CBV</span>
+        <span class="hljs-attr">"_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"cbv"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">CBV</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"timestamp"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987.65</span>
       <span class="hljs-punctuation">}</span>
     <span class="hljs-punctuation">]</span>
   <span class="hljs-punctuation">}</span>
@@ -319,24 +277,18 @@ https://cbv-api.deno.dev/graphql
               </div>
             </div>
           </section>
-          <section
-            id="query-find_by_cbv_code"
-            class="operation operation-query"
-            data-traverse-target="query-find_by_cbv_code"
-          >
+          <section id="query-find_by_cbv_code" class="operation operation-query" data-traverse-target="query-find_by_cbv_code">
             <div class="operation-group-name">
               <a href="#group-Operations-Queries">Queries</a>
             </div>
-            <h2 class="operation-heading">
+            <h2 class="operation-heading ">
               <code>find_by_cbv_code</code>
             </h2>
             <div class="doc-row">
               <div class="doc-copy">
                 <div class="operation-response doc-copy-section">
                   <h5>Response</h5>
-                  <p>
-                    Returns a
-                    <a href="#definition-StoreCBV"><code>StoreCBV</code></a>
+                  <p> Returns a <a href="#definition-StoreCBV"><code>StoreCBV</code></a>
                   </p>
                 </div>
                 <div class="operation-arguments doc-copy-section">
@@ -351,14 +303,10 @@ https://cbv-api.deno.dev/graphql
                     <tbody>
                       <tr>
                         <td>
-                          <span class="property-name"><code>id</code></span> -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String</code></a
-                            ></span
-                          >
+                          <span class="property-name"><code>cbv_id</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -366,15 +314,12 @@ https://cbv-api.deno.dev/graphql
               </div>
               <div class="doc-examples">
                 <h4 class="example-heading">Example</h4>
-                <div
-                  class="example-section example-section-is-code operation-query-example"
-                >
+                <div class="example-section example-section-is-code operation-query-example">
                   <h5>Query</h5>
                   <html>
                     <head></head>
-                    <body>
-                      <pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> find_by_cbv_code<span class="hljs-tag">(<span class="hljs-code">$id</span>:<span class="hljs-type"> String)</span> {
-  find_by_cbv_code(id: <span class="hljs-code">$id</span>)</span> <span class="hljs-tag">{
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> find_by_cbv_code<span class="hljs-tag">(<span class="hljs-code">$cbv_id</span>:<span class="hljs-type"> String)</span> {
+  find_by_cbv_code(cbv_id: <span class="hljs-code">$cbv_id</span>)</span> <span class="hljs-tag">{
     <span class="hljs-symbol">_id</span>
     <span class="hljs-symbol">cbv <span class="hljs-tag">{
       <span class="hljs-symbol">title</span>
@@ -384,6 +329,7 @@ https://cbv-api.deno.dev/graphql
       <span class="hljs-symbol">version_affected</span>
       <span class="hljs-symbol">component</span>
       <span class="hljs-symbol">severity</span>
+      <span class="hljs-symbol">score</span>
       <span class="hljs-symbol">vulnerability_type</span>
       <span class="hljs-symbol">details</span>
       <span class="hljs-symbol">recommendation</span>
@@ -391,39 +337,36 @@ https://cbv-api.deno.dev/graphql
       <span class="hljs-symbol">labels</span>
       <span class="hljs-symbol">tests</span>
       <span class="hljs-symbol">aditional_comments</span>
+      <span class="hljs-symbol">credits</span>
       <span class="hljs-symbol">created_at</span>
       <span class="hljs-symbol">updated_at</span>
     }</span></span>
+    <span class="hljs-symbol">timestamp</span>
   }</span></span>
 }
 </code></pre>
                     </body>
                   </html>
                 </div>
-                <div
-                  class="example-section example-section-is-code operation-variables-example"
-                >
+                <div class="example-section example-section-is-code operation-variables-example">
                   <h5>Variables</h5>
                   <html>
                     <head></head>
-                    <body>
-                      <pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">}</span>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"cbv_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
                   </html>
                 </div>
-                <div
-                  class="example-section example-section-is-code operation-response-example"
-                >
+                <div class="example-section example-section-is-code operation-response-example">
                   <h5>Response</h5>
                   <html>
                     <head></head>
-                    <body>
-                      <pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
     <span class="hljs-attr">"find_by_cbv_code"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-      <span class="hljs-attr">"_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">"cbv"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">CBV</span>
+      <span class="hljs-attr">"_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"cbv"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">CBV</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"timestamp"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123.45</span>
     <span class="hljs-punctuation">}</span>
   <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
@@ -434,24 +377,18 @@ https://cbv-api.deno.dev/graphql
               </div>
             </div>
           </section>
-          <section
-            id="query-find_by_id"
-            class="operation operation-query"
-            data-traverse-target="query-find_by_id"
-          >
+          <section id="query-find_by_id" class="operation operation-query" data-traverse-target="query-find_by_id">
             <div class="operation-group-name">
               <a href="#group-Operations-Queries">Queries</a>
             </div>
-            <h2 class="operation-heading">
+            <h2 class="operation-heading ">
               <code>find_by_id</code>
             </h2>
             <div class="doc-row">
               <div class="doc-copy">
                 <div class="operation-response doc-copy-section">
                   <h5>Response</h5>
-                  <p>
-                    Returns a
-                    <a href="#definition-StoreCBV"><code>StoreCBV</code></a>
+                  <p> Returns a <a href="#definition-StoreCBV"><code>StoreCBV</code></a>
                   </p>
                 </div>
                 <div class="operation-arguments doc-copy-section">
@@ -466,14 +403,10 @@ https://cbv-api.deno.dev/graphql
                     <tbody>
                       <tr>
                         <td>
-                          <span class="property-name"><code>_id</code></span> -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String</code></a
-                            ></span
-                          >
+                          <span class="property-name"><code>_id</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -481,14 +414,11 @@ https://cbv-api.deno.dev/graphql
               </div>
               <div class="doc-examples">
                 <h4 class="example-heading">Example</h4>
-                <div
-                  class="example-section example-section-is-code operation-query-example"
-                >
+                <div class="example-section example-section-is-code operation-query-example">
                   <h5>Query</h5>
                   <html>
                     <head></head>
-                    <body>
-                      <pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> find_by_id<span class="hljs-tag">(<span class="hljs-code">$_id</span>:<span class="hljs-type"> String)</span> {
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> find_by_id<span class="hljs-tag">(<span class="hljs-code">$_id</span>:<span class="hljs-type"> String)</span> {
   find_by_id(_id: <span class="hljs-code">$_id</span>)</span> <span class="hljs-tag">{
     <span class="hljs-symbol">_id</span>
     <span class="hljs-symbol">cbv <span class="hljs-tag">{
@@ -499,6 +429,7 @@ https://cbv-api.deno.dev/graphql
       <span class="hljs-symbol">version_affected</span>
       <span class="hljs-symbol">component</span>
       <span class="hljs-symbol">severity</span>
+      <span class="hljs-symbol">score</span>
       <span class="hljs-symbol">vulnerability_type</span>
       <span class="hljs-symbol">details</span>
       <span class="hljs-symbol">recommendation</span>
@@ -506,39 +437,36 @@ https://cbv-api.deno.dev/graphql
       <span class="hljs-symbol">labels</span>
       <span class="hljs-symbol">tests</span>
       <span class="hljs-symbol">aditional_comments</span>
+      <span class="hljs-symbol">credits</span>
       <span class="hljs-symbol">created_at</span>
       <span class="hljs-symbol">updated_at</span>
     }</span></span>
+    <span class="hljs-symbol">timestamp</span>
   }</span></span>
 }
 </code></pre>
                     </body>
                   </html>
                 </div>
-                <div
-                  class="example-section example-section-is-code operation-variables-example"
-                >
+                <div class="example-section example-section-is-code operation-variables-example">
                   <h5>Variables</h5>
                   <html>
                     <head></head>
-                    <body>
-                      <pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">}</span>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
                   </html>
                 </div>
-                <div
-                  class="example-section example-section-is-code operation-response-example"
-                >
+                <div class="example-section example-section-is-code operation-response-example">
                   <h5>Response</h5>
                   <html>
                     <head></head>
-                    <body>
-                      <pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
     <span class="hljs-attr">"find_by_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-      <span class="hljs-attr">"_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">"cbv"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">CBV</span>
+      <span class="hljs-attr">"_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"cbv"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">CBV</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"timestamp"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123.45</span>
     <span class="hljs-punctuation">}</span>
   <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
@@ -549,28 +477,18 @@ https://cbv-api.deno.dev/graphql
               </div>
             </div>
           </section>
-          <h1
-            id="group-Operations-Mutations"
-            class="group-heading"
-            data-traverse-target="group-Operations-Mutations"
-          >
-            Mutations
-          </h1>
-          <section
-            id="mutation-store_cbv"
-            class="operation operation-mutation"
-            data-traverse-target="mutation-store_cbv"
-          >
-            <h2 class="operation-heading">
-              <code>store_cbv</code>
+          <section id="query-find_by_latest" class="operation operation-query" data-traverse-target="query-find_by_latest">
+            <div class="operation-group-name">
+              <a href="#group-Operations-Queries">Queries</a>
+            </div>
+            <h2 class="operation-heading ">
+              <code>find_by_latest</code>
             </h2>
             <div class="doc-row">
               <div class="doc-copy">
                 <div class="operation-response doc-copy-section">
                   <h5>Response</h5>
-                  <p>
-                    Returns a
-                    <a href="#definition-String"><code>String!</code></a>
+                  <p> Returns <a href="#definition-StoreCBV"><code>[StoreCBV]</code></a>
                   </p>
                 </div>
                 <div class="operation-arguments doc-copy-section">
@@ -585,14 +503,10 @@ https://cbv-api.deno.dev/graphql
                     <tbody>
                       <tr>
                         <td>
-                          <span class="property-name"><code>cbv</code></span> -
-                          <span class="property-type"
-                            ><a href="#definition-toBeStoreCBV"
-                              ><code>toBeStoreCBV</code></a
-                            ></span
-                          >
+                          <span class="property-name"><code>number</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -600,40 +514,335 @@ https://cbv-api.deno.dev/graphql
               </div>
               <div class="doc-examples">
                 <h4 class="example-heading">Example</h4>
-                <div
-                  class="example-section example-section-is-code operation-query-example"
-                >
+                <div class="example-section example-section-is-code operation-query-example">
                   <h5>Query</h5>
                   <html>
                     <head></head>
-                    <body>
-                      <pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">mutation</span> store_cbv<span class="hljs-tag">(<span class="hljs-code">$cbv</span>: toBeStoreCBV)</span> <span class="hljs-tag">{
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> find_by_latest<span class="hljs-tag">(<span class="hljs-code">$number</span>:<span class="hljs-type"> String)</span> {
+  find_by_latest(number: <span class="hljs-code">$number</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">_id</span>
+    <span class="hljs-symbol">cbv <span class="hljs-tag">{
+      <span class="hljs-symbol">title</span>
+      <span class="hljs-symbol">short_description</span>
+      <span class="hljs-symbol">cbv_id</span>
+      <span class="hljs-symbol">blockchain</span>
+      <span class="hljs-symbol">version_affected</span>
+      <span class="hljs-symbol">component</span>
+      <span class="hljs-symbol">severity</span>
+      <span class="hljs-symbol">score</span>
+      <span class="hljs-symbol">vulnerability_type</span>
+      <span class="hljs-symbol">details</span>
+      <span class="hljs-symbol">recommendation</span>
+      <span class="hljs-symbol">references</span>
+      <span class="hljs-symbol">labels</span>
+      <span class="hljs-symbol">tests</span>
+      <span class="hljs-symbol">aditional_comments</span>
+      <span class="hljs-symbol">credits</span>
+      <span class="hljs-symbol">created_at</span>
+      <span class="hljs-symbol">updated_at</span>
+    }</span></span>
+    <span class="hljs-symbol">timestamp</span>
+  }</span></span>
+}
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-variables-example">
+                  <h5>Variables</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"number"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-response-example">
+                  <h5>Response</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"find_by_latest"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">"_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"cbv"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">CBV</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"timestamp"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123.45</span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="query-find_by_search_string" class="operation operation-query" data-traverse-target="query-find_by_search_string">
+            <div class="operation-group-name">
+              <a href="#group-Operations-Queries">Queries</a>
+            </div>
+            <h2 class="operation-heading ">
+              <code>find_by_search_string</code>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="operation-response doc-copy-section">
+                  <h5>Response</h5>
+                  <p> Returns <a href="#definition-StoreCBV"><code>[StoreCBV]</code></a>
+                  </p>
+                </div>
+                <div class="operation-arguments doc-copy-section">
+                  <h5>Arguments</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>search_string</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <h4 class="example-heading">Example</h4>
+                <div class="example-section example-section-is-code operation-query-example">
+                  <h5>Query</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> find_by_search_string<span class="hljs-tag">(<span class="hljs-code">$search_string</span>:<span class="hljs-type"> String)</span> {
+  find_by_search_string(search_string: <span class="hljs-code">$search_string</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">_id</span>
+    <span class="hljs-symbol">cbv <span class="hljs-tag">{
+      <span class="hljs-symbol">title</span>
+      <span class="hljs-symbol">short_description</span>
+      <span class="hljs-symbol">cbv_id</span>
+      <span class="hljs-symbol">blockchain</span>
+      <span class="hljs-symbol">version_affected</span>
+      <span class="hljs-symbol">component</span>
+      <span class="hljs-symbol">severity</span>
+      <span class="hljs-symbol">score</span>
+      <span class="hljs-symbol">vulnerability_type</span>
+      <span class="hljs-symbol">details</span>
+      <span class="hljs-symbol">recommendation</span>
+      <span class="hljs-symbol">references</span>
+      <span class="hljs-symbol">labels</span>
+      <span class="hljs-symbol">tests</span>
+      <span class="hljs-symbol">aditional_comments</span>
+      <span class="hljs-symbol">credits</span>
+      <span class="hljs-symbol">created_at</span>
+      <span class="hljs-symbol">updated_at</span>
+    }</span></span>
+    <span class="hljs-symbol">timestamp</span>
+  }</span></span>
+}
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-variables-example">
+                  <h5>Variables</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"search_string"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-response-example">
+                  <h5>Response</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"find_by_search_string"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">"_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"cbv"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">CBV</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"timestamp"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123.45</span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="query-find_with_time_frame" class="operation operation-query" data-traverse-target="query-find_with_time_frame">
+            <div class="operation-group-name">
+              <a href="#group-Operations-Queries">Queries</a>
+            </div>
+            <h2 class="operation-heading ">
+              <code>find_with_time_frame</code>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="operation-response doc-copy-section">
+                  <h5>Response</h5>
+                  <p> Returns <a href="#definition-StoreCBV"><code>[StoreCBV]</code></a>
+                  </p>
+                </div>
+                <div class="operation-arguments doc-copy-section">
+                  <h5>Arguments</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>timeframe</code></span> - <span class="property-type"><a href="#definition-SearchByTimeFrame"><code>SearchByTimeFrame</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <h4 class="example-heading">Example</h4>
+                <div class="example-section example-section-is-code operation-query-example">
+                  <h5>Query</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> find_with_time_frame<span class="hljs-tag">(<span class="hljs-code">$timeframe</span>:<span class="hljs-type"> SearchByTimeFrame)</span> {
+  find_with_time_frame(timeframe: <span class="hljs-code">$timeframe</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">_id</span>
+    <span class="hljs-symbol">cbv <span class="hljs-tag">{
+      <span class="hljs-symbol">title</span>
+      <span class="hljs-symbol">short_description</span>
+      <span class="hljs-symbol">cbv_id</span>
+      <span class="hljs-symbol">blockchain</span>
+      <span class="hljs-symbol">version_affected</span>
+      <span class="hljs-symbol">component</span>
+      <span class="hljs-symbol">severity</span>
+      <span class="hljs-symbol">score</span>
+      <span class="hljs-symbol">vulnerability_type</span>
+      <span class="hljs-symbol">details</span>
+      <span class="hljs-symbol">recommendation</span>
+      <span class="hljs-symbol">references</span>
+      <span class="hljs-symbol">labels</span>
+      <span class="hljs-symbol">tests</span>
+      <span class="hljs-symbol">aditional_comments</span>
+      <span class="hljs-symbol">credits</span>
+      <span class="hljs-symbol">created_at</span>
+      <span class="hljs-symbol">updated_at</span>
+    }</span></span>
+    <span class="hljs-symbol">timestamp</span>
+  }</span></span>
+}
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-variables-example">
+                  <h5>Variables</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"timeframe"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">SearchByTimeFrame</span><span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-response-example">
+                  <h5>Response</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"find_with_time_frame"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">"_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"cbv"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">CBV</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"timestamp"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123.45</span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <h1 id="group-Operations-Mutations" class="group-heading" data-traverse-target="group-Operations-Mutations">Mutations</h1>
+          <section id="mutation-store_cbv" class="operation operation-mutation" data-traverse-target="mutation-store_cbv">
+            <h2 class="operation-heading ">
+              <code>store_cbv</code>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="operation-response doc-copy-section">
+                  <h5>Response</h5>
+                  <p> Returns a <a href="#definition-String"><code>String!</code></a>
+                  </p>
+                </div>
+                <div class="operation-arguments doc-copy-section">
+                  <h5>Arguments</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>cbv</code></span> - <span class="property-type"><a href="#definition-toBeStoreCBV"><code>toBeStoreCBV</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <h4 class="example-heading">Example</h4>
+                <div class="example-section example-section-is-code operation-query-example">
+                  <h5>Query</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">mutation</span> store_cbv<span class="hljs-tag">(<span class="hljs-code">$cbv</span>: toBeStoreCBV)</span> <span class="hljs-tag">{
   <span class="hljs-symbol">store_cbv<span class="hljs-tag">(cbv: <span class="hljs-code">$cbv</span>)</span></span>
 }</span></span>
 </code></pre>
                     </body>
                   </html>
                 </div>
-                <div
-                  class="example-section example-section-is-code operation-variables-example"
-                >
+                <div class="example-section example-section-is-code operation-variables-example">
                   <h5>Variables</h5>
                   <html>
                     <head></head>
-                    <body>
-                      <pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"cbv"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">toBeStoreCBV</span><span class="hljs-punctuation">}</span>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"cbv"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">toBeStoreCBV</span><span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
                   </html>
                 </div>
-                <div
-                  class="example-section example-section-is-code operation-response-example"
-                >
+                <div class="example-section example-section-is-code operation-response-example">
                   <h5>Response</h5>
                   <html>
                     <head></head>
-                    <body>
-                      <pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-attr">"store_cbv"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">}</span>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-attr">"store_cbv"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
                   </html>
@@ -641,48 +850,21 @@ https://cbv-api.deno.dev/graphql
               </div>
             </div>
           </section>
-          <h1
-            id="group-Types"
-            class="group-heading"
-            data-traverse-target="group-Types"
-          >
-            Types
-          </h1>
-          <section
-            id="definition-Boolean"
-            class="definition definition-scalar"
-            data-traverse-target="definition-Boolean"
-          >
+          <h1 id="group-Types" class="group-heading" data-traverse-target="group-Types">Types</h1>
+          <section id="definition-Boolean" class="definition definition-scalar" data-traverse-target="definition-Boolean">
             <h2 class="definition-heading">Boolean</h2>
             <div class="doc-row">
               <div class="doc-copy">
                 <div class="definition-description doc-copy-section">
                   <h5>Description</h5>
-                  <p>
-                    The <code>Boolean</code> scalar type represents
-                    <code>true</code> or <code>false</code>.
-                  </p>
+                  <p>The <code>Boolean</code> scalar type represents <code>true</code> or <code>false</code>.</p>
                 </div>
               </div>
               <div class="doc-examples">
-                <div class="example-section example-section-is-code">
-                  <h5>Example</h5>
-                  <html>
-                    <head></head>
-                    <body>
-                      <pre><code class="hljs language-json"><span class="hljs-literal"><span class="hljs-keyword">true</span></span>
-</code></pre>
-                    </body>
-                  </html>
-                </div>
               </div>
             </div>
           </section>
-          <section
-            id="definition-CBV"
-            class="definition definition-object"
-            data-traverse-target="definition-CBV"
-          >
+          <section id="definition-CBV" class="definition definition-object" data-traverse-target="definition-CBV">
             <div class="definition-group-name">
               <a href="#group-Types">Types</a>
             </div>
@@ -700,220 +882,112 @@ https://cbv-api.deno.dev/graphql
                     </thead>
                     <tbody>
                       <tr>
-                        <td data-property-name="">
-                          <span class="property-name"><code>title</code></span>
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String</code></a
-                            ></span
-                          >
+                        <td data-property-name=""><span class="property-name"><code>title</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
-                        <td data-property-name="">
-                          <span class="property-name"
-                            ><code>short_description</code></span
-                          >
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String</code></a
-                            ></span
-                          >
+                        <td data-property-name=""><span class="property-name"><code>short_description</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
-                        <td data-property-name="">
-                          <span class="property-name"><code>cbv_id</code></span>
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String</code></a
-                            ></span
-                          >
+                        <td data-property-name=""><span class="property-name"><code>cbv_id</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
-                        <td data-property-name="">
-                          <span class="property-name"
-                            ><code>blockchain</code></span
-                          >
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String</code></a
-                            ></span
-                          >
+                        <td data-property-name=""><span class="property-name"><code>blockchain</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
-                        <td data-property-name="">
-                          <span class="property-name"
-                            ><code>version_affected</code></span
-                          >
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String</code></a
-                            ></span
-                          >
+                        <td data-property-name=""><span class="property-name"><code>version_affected</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
-                        <td data-property-name="">
-                          <span class="property-name"
-                            ><code>component</code></span
-                          >
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String</code></a
-                            ></span
-                          >
+                        <td data-property-name=""><span class="property-name"><code>component</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
-                        <td data-property-name="">
-                          <span class="property-name"
-                            ><code>severity</code></span
-                          >
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String</code></a
-                            ></span
-                          >
+                        <td data-property-name=""><span class="property-name"><code>severity</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
-                        <td data-property-name="">
-                          <span class="property-name"
-                            ><code>vulnerability_type</code></span
-                          >
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String</code></a
-                            ></span
-                          >
+                        <td data-property-name=""><span class="property-name"><code>score</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
-                        <td data-property-name="">
-                          <span class="property-name"
-                            ><code>details</code></span
-                          >
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String</code></a
-                            ></span
-                          >
+                        <td data-property-name=""><span class="property-name"><code>vulnerability_type</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
-                        <td data-property-name="">
-                          <span class="property-name"
-                            ><code>recommendation</code></span
-                          >
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String</code></a
-                            ></span
-                          >
+                        <td data-property-name=""><span class="property-name"><code>details</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
-                        <td data-property-name="">
-                          <span class="property-name"
-                            ><code>references</code></span
-                          >
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String</code></a
-                            ></span
-                          >
+                        <td data-property-name=""><span class="property-name"><code>recommendation</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
-                        <td data-property-name="">
-                          <span class="property-name"><code>labels</code></span>
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String</code></a
-                            ></span
-                          >
+                        <td data-property-name=""><span class="property-name"><code>references</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
-                        <td data-property-name="">
-                          <span class="property-name"><code>tests</code></span>
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String</code></a
-                            ></span
-                          >
+                        <td data-property-name=""><span class="property-name"><code>labels</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
-                        <td data-property-name="">
-                          <span class="property-name"
-                            ><code>aditional_comments</code></span
-                          >
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String</code></a
-                            ></span
-                          >
+                        <td data-property-name=""><span class="property-name"><code>tests</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
-                        <td data-property-name="">
-                          <span class="property-name"
-                            ><code>created_at</code></span
-                          >
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String</code></a
-                            ></span
-                          >
+                        <td data-property-name=""><span class="property-name"><code>aditional_comments</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
-                        <td data-property-name="">
-                          <span class="property-name"
-                            ><code>updated_at</code></span
-                          >
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String</code></a
-                            ></span
-                          >
+                        <td data-property-name=""><span class="property-name"><code>credits</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>created_at</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>updated_at</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -924,24 +998,25 @@ https://cbv-api.deno.dev/graphql
                   <h5>Example</h5>
                   <html>
                     <head></head>
-                    <body>
-                      <pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"title"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"short_description"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"cbv_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"blockchain"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"version_affected"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"component"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"component"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"severity"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"score"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"vulnerability_type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"details"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"recommendation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"references"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"labels"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"labels"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"tests"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"aditional_comments"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"aditional_comments"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"credits"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"created_at"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"updated_at"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+  <span class="hljs-attr">"updated_at"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -950,11 +1025,80 @@ https://cbv-api.deno.dev/graphql
               </div>
             </div>
           </section>
-          <section
-            id="definition-StoreCBV"
-            class="definition definition-object"
-            data-traverse-target="definition-StoreCBV"
-          >
+          <section id="definition-Float" class="definition definition-scalar" data-traverse-target="definition-Float">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">Float</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>The <code>Float</code> scalar type represents signed double-precision fractional values as specified by <a href="https://en.wikipedia.org/wiki/IEEE_floating_point">IEEE 754</a>.</p>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-number">987.65</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-SearchByTimeFrame" class="definition definition-input-object" data-traverse-target="definition-SearchByTimeFrame">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">SearchByTimeFrame</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Input Field</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>start</code></span> - <span class="property-type"><a href="#definition-Float"><code>Float</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>end</code></span> - <span class="property-type"><a href="#definition-Float"><code>Float</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"start"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987.65</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"end"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987.65</span><span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-StoreCBV" class="definition definition-object" data-traverse-target="definition-StoreCBV">
             <div class="definition-group-name">
               <a href="#group-Types">Types</a>
             </div>
@@ -972,26 +1116,22 @@ https://cbv-api.deno.dev/graphql
                     </thead>
                     <tbody>
                       <tr>
-                        <td data-property-name="">
-                          <span class="property-name"><code>_id</code></span> -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String</code></a
-                            ></span
-                          >
+                        <td data-property-name=""><span class="property-name"><code>_id</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
-                        <td data-property-name="">
-                          <span class="property-name"><code>cbv</code></span> -
-                          <span class="property-type"
-                            ><a href="#definition-CBV"
-                              ><code>CBV</code></a
-                            ></span
-                          >
+                        <td data-property-name=""><span class="property-name"><code>cbv</code></span> - <span class="property-type"><a href="#definition-CBV"><code>CBV</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>timestamp</code></span> - <span class="property-type"><a href="#definition-Float"><code>Float</code></a></span>
+                        </td>
+                        <td>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -1002,10 +1142,10 @@ https://cbv-api.deno.dev/graphql
                   <h5>Example</h5>
                   <html>
                     <head></head>
-                    <body>
-                      <pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"cbv"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">CBV</span>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"cbv"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">CBV</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"timestamp"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123.45</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -1014,11 +1154,7 @@ https://cbv-api.deno.dev/graphql
               </div>
             </div>
           </section>
-          <section
-            id="definition-String"
-            class="definition definition-scalar"
-            data-traverse-target="definition-String"
-          >
+          <section id="definition-String" class="definition definition-scalar" data-traverse-target="definition-String">
             <div class="definition-group-name">
               <a href="#group-Types">Types</a>
             </div>
@@ -1027,12 +1163,7 @@ https://cbv-api.deno.dev/graphql
               <div class="doc-copy">
                 <div class="definition-description doc-copy-section">
                   <h5>Description</h5>
-                  <p>
-                    The <code>String</code> scalar type represents textual data,
-                    represented as UTF-8 character sequences. The String type is
-                    most often used by GraphQL to represent free-form
-                    human-readable text.
-                  </p>
+                  <p>The <code>String</code> scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.</p>
                 </div>
               </div>
               <div class="doc-examples">
@@ -1040,8 +1171,7 @@ https://cbv-api.deno.dev/graphql
                   <h5>Example</h5>
                   <html>
                     <head></head>
-                    <body>
-                      <pre><code class="hljs language-gql"><span class="hljs-symbol">"abc123"</span>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol">"xyz789"</span>
 </code></pre>
                     </body>
                   </html>
@@ -1049,11 +1179,7 @@ https://cbv-api.deno.dev/graphql
               </div>
             </div>
           </section>
-          <section
-            id="definition-toBeStoreCBV"
-            class="definition definition-input-object"
-            data-traverse-target="definition-toBeStoreCBV"
-          >
+          <section id="definition-toBeStoreCBV" class="definition definition-input-object" data-traverse-target="definition-toBeStoreCBV">
             <div class="definition-group-name">
               <a href="#group-Types">Types</a>
             </div>
@@ -1072,233 +1198,136 @@ https://cbv-api.deno.dev/graphql
                     <tbody>
                       <tr>
                         <td>
-                          <span class="property-name"><code>title</code></span>
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String!</code></a
-                            ></span
-                          >
+                          <span class="property-name"><code>title</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
                         <td>
-                          <span class="property-name"
-                            ><code>short_description</code></span
-                          >
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String!</code></a
-                            ></span
-                          >
+                          <span class="property-name"><code>short_description</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
                         <td>
-                          <span class="property-name"><code>cbv_id</code></span>
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String!</code></a
-                            ></span
-                          >
+                          <span class="property-name"><code>cbv_id</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
                         <td>
-                          <span class="property-name"
-                            ><code>blockchain</code></span
-                          >
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String!</code></a
-                            ></span
-                          >
+                          <span class="property-name"><code>blockchain</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
                         <td>
-                          <span class="property-name"
-                            ><code>version_affected</code></span
-                          >
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String!</code></a
-                            ></span
-                          >
+                          <span class="property-name"><code>version_affected</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
                         <td>
-                          <span class="property-name"
-                            ><code>component</code></span
-                          >
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String!</code></a
-                            ></span
-                          >
+                          <span class="property-name"><code>component</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
                         <td>
-                          <span class="property-name"
-                            ><code>severity</code></span
-                          >
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String!</code></a
-                            ></span
-                          >
+                          <span class="property-name"><code>severity</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
                         <td>
-                          <span class="property-name"
-                            ><code>vulnerability_type</code></span
-                          >
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String!</code></a
-                            ></span
-                          >
+                          <span class="property-name"><code>score</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
                         <td>
-                          <span class="property-name"
-                            ><code>details</code></span
-                          >
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String!</code></a
-                            ></span
-                          >
+                          <span class="property-name"><code>vulnerability_type</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
                         <td>
-                          <span class="property-name"
-                            ><code>recommendation</code></span
-                          >
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String!</code></a
-                            ></span
-                          >
+                          <span class="property-name"><code>details</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
                         <td>
-                          <span class="property-name"
-                            ><code>references</code></span
-                          >
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String!</code></a
-                            ></span
-                          >
+                          <span class="property-name"><code>recommendation</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
                         <td>
-                          <span class="property-name"><code>labels</code></span>
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String!</code></a
-                            ></span
-                          >
+                          <span class="property-name"><code>references</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
                         <td>
-                          <span class="property-name"><code>tests</code></span>
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String!</code></a
-                            ></span
-                          >
+                          <span class="property-name"><code>labels</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
                         <td>
-                          <span class="property-name"
-                            ><code>aditional_comments</code></span
-                          >
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String!</code></a
-                            ></span
-                          >
+                          <span class="property-name"><code>tests</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
                         <td>
-                          <span class="property-name"
-                            ><code>created_at</code></span
-                          >
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String!</code></a
-                            ></span
-                          >
+                          <span class="property-name"><code>aditional_comments</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
                         <td>
-                          <span class="property-name"
-                            ><code>updated_at</code></span
-                          >
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String!</code></a
-                            ></span
-                          >
+                          <span class="property-name"><code>credits</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
                       </tr>
                       <tr>
                         <td>
-                          <span class="property-name"
-                            ><code>api_key</code></span
-                          >
-                          -
-                          <span class="property-type"
-                            ><a href="#definition-String"
-                              ><code>String!</code></a
-                            ></span
-                          >
+                          <span class="property-name"><code>created_at</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
                         </td>
-                        <td></td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>updated_at</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>api_key</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
+                        </td>
+                        <td>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -1309,22 +1338,23 @@ https://cbv-api.deno.dev/graphql
                   <h5>Example</h5>
                   <html>
                     <head></head>
-                    <body>
-                      <pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"title"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"short_description"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"short_description"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"cbv_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"blockchain"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"version_affected"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"component"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"severity"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"version_affected"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"component"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"severity"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"score"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"vulnerability_type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"details"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"recommendation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"recommendation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"references"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"labels"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"tests"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"aditional_comments"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"credits"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"created_at"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"updated_at"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"api_key"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
@@ -1338,9 +1368,7 @@ https://cbv-api.deno.dev/graphql
           </section>
           <div class="doc-row no-margin">
             <div class="doc-copy doc-separator">
-              <a class="powered-by" href="https://github.com/anvilco/spectaql"
-                >Documentation by <span>Anvil SpectaQL</span></a
-              >
+              <a class="powered-by" href="https://github.com/anvilco/spectaql">Documentation by <span>Anvil SpectaQL</span></a>
             </div>
           </div>
         </article>
