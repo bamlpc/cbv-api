@@ -35,7 +35,7 @@ const typeDefs = gql`
     find_by_latest(number: String): [StoreCBV],
     find_with_time_frame(timeframe: SearchByTimeFrame): [StoreCBV],
   }
-  type SearchByTimeFrame {
+  input SearchByTimeFrame {
     start: Float
     end: Float
   }
