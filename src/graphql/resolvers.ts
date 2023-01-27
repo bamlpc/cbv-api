@@ -1,4 +1,4 @@
-import { Issue } from 'schemas';
+import { CBV } from 'schemas';
 import {
 	mongodb_find_all_cbv,
 	mongodb_find_by_blockchain,
@@ -9,6 +9,7 @@ import {
 	mongodb_find_by_latest
 } from '../mongodb/methods.ts';
 import { store_cbv_with_credentials } from '../helpers/graphql_post_handler.ts';
+
 const resolvers = {
 	Query: {
 		find_all_cbv: () => mongodb_find_all_cbv(),
@@ -32,9 +33,10 @@ const resolvers = {
 	},
 	Mutation: {
 		// deno-lint-ignore no-explicit-any
-		store_cbv: (_root: any, args: Record<string, Issue>) =>
+		store_cbv: (_root: any, args: Record<string, CBV>) =>
 			store_cbv_with_credentials(args),
 	},
-};
+}; 
+
 
 export { resolvers };

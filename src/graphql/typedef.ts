@@ -2,12 +2,9 @@ import { gql } from 'deps';
 
 const typeDefs = gql`
   type Mutation {
-    store_cbv(issue: Issue): String!
+    store_cbv(cbv: toBeStoreCBV): String!
   }
-  input Issue {
-    cbv: toBeStoreCBV
-    timestamp: String
-  }
+
   input toBeStoreCBV {
     title: String!
     short_description: String!
@@ -35,12 +32,12 @@ const typeDefs = gql`
     find_by_blockchain(blockchain: [String]): [StoreCBV],
     find_by_cbv_code(cbv_id: String): StoreCBV,
     find_by_search_string(search_string: String): [StoreCBV],
-    find_by_latest(number: String): [StoreCBV]
-    find_with_time_frame(timeframe: SearchByTimeFrame): [StoreCBV]
+    find_by_latest(number: String): [StoreCBV],
+    find_with_time_frame(timeframe: SearchByTimeFrame): [StoreCBV],
   }
   type SearchByTimeFrame {
-    start: number
-    end: number
+    start: Float
+    end: Float
   }
   type CBV {
     title: String
@@ -65,7 +62,7 @@ const typeDefs = gql`
   type StoreCBV {
     _id: String
     cbv: CBV
-    timestamp: number
+    timestamp: Float
   }
 `;
 

@@ -1,10 +1,11 @@
 import { mongo } from 'deps';
-import { MongoCBVSchema, Issue } from 'schemas';
+import { MongoCBVSchema, CBV } from 'schemas';
 import { issues } from './helpers/connection.ts';
 import { getSeverity } from './helpers/functions.ts'
 
-async function mongodb_store_cbv(store: Record<string, Issue>): Promise<string> {
-	const _new = store.issue.cbv;
+async function mongodb_store_cbv(store: Record<string, CBV>): Promise<string> {
+	const _new = store.cbv;
+	const severityString = getSeverity(_new.severity);
 	const _store = {
 		cbv: {
 			title: _new.title,
@@ -13,7 +14,7 @@ async function mongodb_store_cbv(store: Record<string, Issue>): Promise<string> 
 			blockchain: _new.blockchain,
 			version_affected: _new.version_affected,
 			component: _new.component,
-			severity: getSeverity(_new.severity),
+			severity: severityString,
 			score: _new.severity,
 			vulnerability_type: _new.vulnerability_type,
 			details: _new.details,
@@ -28,8 +29,9 @@ async function mongodb_store_cbv(store: Record<string, Issue>): Promise<string> 
 		},
 		timestamp: new Date().getTime()
 	};
-	const { _matchedCount, _modifiedCount, upsertedId } = await issues.updateOne(
-		{ 'cbv.cbv_id': { $in: [store.issue.cbv.cbv_id] } },
+	// deno-lint-ignore no-unused-vars
+	const { matchedCount, modifiedCount, upsertedId } = await issues.updateOne(
+		{ 'cbv.cbv_id': { $in: [store.cbv.cbv_id] } },
 		{ $set: _store },
 		{ upsert: true },
 	);
@@ -123,7 +125,7 @@ const mongodb_find_with_time_frame = async (input: Record<string, Record<string,
 	if (!input.timeframe.start) input.timeframe.start = new Date(2023, 11, 1).getTime()
 	if (!input.timeframe.end) input.timeframe.end = new Date().getTime()
 	try {
-		const find_with_time_frame = await issues.find({ timestamp: { $gte: input.timeframe.start, $lt: input.timeframe.end } })
+		const find_with_time_frame = await issues.find({ timestamp: { $gte: input.timeframe.start, $lt: input.timeframe.end } }, { noCursorTimeout: false })
 		return find_with_time_frame.toArray()
 	} catch (error) {
 	return error.message;
