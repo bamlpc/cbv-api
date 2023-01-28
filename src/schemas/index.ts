@@ -30,6 +30,7 @@ interface CBV {
 interface MongoCBVSchema {
 	_id: mongo.ObjectId;
 	cbv: CBV;
+	timestamp: number;
 }
 
 export type { CBV, Issue, MongoCBVSchema };
