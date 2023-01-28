@@ -13,7 +13,6 @@ const typeDefs = gql`
     version_affected: String!
     component: String!
     severity: String!
-    score: String!
     vulnerability_type: String!
     details: String!
     recommendation: String!

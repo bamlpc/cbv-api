@@ -28,8 +28,8 @@ const resolvers = {
 		// deno-lint-ignore no-explicit-any
 		find_by_cbv_code: (_root: any, args: Record<string, string>) =>
 			mongodb_find_by_cbv_code(args),
-		// deno-lint-ignore no-explicit-any
-		find_with_time_frame: (
+			find_with_time_frame: (
+			// deno-lint-ignore no-explicit-any
 			_root: any,
 			args: Record<string, Record<string, number>>,
 		) => mongodb_find_with_time_frame(args),
