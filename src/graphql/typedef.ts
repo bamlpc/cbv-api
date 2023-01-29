@@ -68,11 +68,11 @@ const typeDefs = gql`
   type HomePage {
     blockchains: [HomeList]
     severities: [HomeList]
-    contributors: [HomeList]
+    contributors: [String]
   }
 
   type HomeList {
-    name: Float
+    key: Float
   }
 `;
 
