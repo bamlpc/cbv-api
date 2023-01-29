@@ -185,9 +185,9 @@ const mongodb_find_for_home_page = async (input: Record<string, Record<string, n
 			
 		//returning object
 		const return_object = {
-			total_new_cbv_by_blockchain: bc_counts,
-			total_new_cbv_by_severity: sev_counts,
-			total_new_cbv_contributors: credits_new_issues,
+			blockchains: bc_counts,
+			severities: sev_counts,
+			contributors: credits_new_issues,
 		}
 		return return_object
 	} catch (error) {
