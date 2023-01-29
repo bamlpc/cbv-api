@@ -33,7 +33,7 @@ const typeDefs = gql`
     find_by_search_string(search_string: String): [StoreCBV],
     find_by_latest(number: String): [StoreCBV],
     find_with_time_frame(timeframe: SearchByTimeFrame): [StoreCBV],
-    find_for_home_page(timeframe: SearchByTimeFrame): [StoreCBV],
+    find_for_home_page(timeframe: SearchByTimeFrame): HomePage,
   }
   input SearchByTimeFrame {
     start: Float
@@ -63,6 +63,16 @@ const typeDefs = gql`
     _id: String
     cbv: CBV
     timestamp: Float
+  }
+
+  type HomePage {
+    blockchains: [HomeList]
+    severities: [HomeList]
+    contributors: [HomeList]
+  }
+
+  type HomeList {
+    name: Float
   }
 `;
 
