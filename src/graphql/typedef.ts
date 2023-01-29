@@ -66,13 +66,9 @@ const typeDefs = gql`
   }
 
   type HomePage {
-    blockchains: [HomeList]
-    severities: [HomeList]
+    blockchains: [String]
+    severities: [String]
     contributors: [String]
-  }
-
-  type HomeList {
-    key: Float
   }
 `;
 

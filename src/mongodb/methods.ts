@@ -174,9 +174,9 @@ const mongodb_find_for_home_page = async (input: Record<string, Record<string, n
 		for (const sev of severiry_new_issues) {
 			sev_counts[sev] = (sev_counts[sev] || 0) + 1
 		}
-		// severity contributors count
+		// contributors issues count
 		const credits_new_issues = get_items_with_timeframe.map((item: MongoCBVSchema): string => {
-			return item.cbv.severity
+			return item.cbv.credits
 		})
 		const cred_counts: Record<string, number> = {}
 		for (const usr of severiry_new_issues) {
@@ -185,9 +185,9 @@ const mongodb_find_for_home_page = async (input: Record<string, Record<string, n
 			
 		//returning object
 		const return_object = {
-			blockchains: bc_counts,
-			severities: sev_counts,
-			contributors: credits_new_issues,
+			blockchains: JSON.stringify(bc_counts),
+			severities: JSON.stringify(sev_counts),
+			contributors: JSON.stringify(credits_new_issues),
 		}
 		return return_object
 	} catch (error) {
