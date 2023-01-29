@@ -1,5 +1,4 @@
 import { mongo } from 'deps';
-import { accepts } from 'https://deno.land/std@0.170.0/http/negotiation';
 import { CBV, MongoCBVSchema } from 'schemas';
 import { issues } from './helpers/connection.ts';
 import { getSeverity } from './helpers/functions.ts';

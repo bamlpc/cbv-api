@@ -1,7 +1,7 @@
 {
 	"imports": {
 		"deps": "../deps.ts",
-		"std/": "https://deno.land/std@0.170.0/",
+		"std/": "https://deno.land/std@0.175.0/",
 		"third/": "https://deno.land/x/",
 		"schemas": "../src/schemas/index.ts",
 		"environment": "../src/constants/environment.ts"
