@@ -7,6 +7,7 @@ import {
 	mongodb_find_by_latest,
 	mongodb_find_with_search_string,
 	mongodb_find_with_time_frame,
+	mongodb_find_for_home_page,
 } from '../mongodb/methods.ts';
 import { store_cbv_with_credentials } from '../helpers/graphql_post_handler.ts';
 
@@ -28,11 +29,16 @@ const resolvers = {
 		// deno-lint-ignore no-explicit-any
 		find_by_cbv_code: (_root: any, args: Record<string, string>) =>
 			mongodb_find_by_cbv_code(args),
-			find_with_time_frame: (
+		find_with_time_frame: (
 			// deno-lint-ignore no-explicit-any
 			_root: any,
 			args: Record<string, Record<string, number>>,
 		) => mongodb_find_with_time_frame(args),
+		find_for_home_page: (
+			// deno-lint-ignore no-explicit-any
+			_root: any,
+			args: Record<string, Record<string, number>>,
+		) => mongodb_find_for_home_page(args),
 	},
 	Mutation: {
 		// deno-lint-ignore no-explicit-any

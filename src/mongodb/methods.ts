@@ -1,4 +1,5 @@
 import { mongo } from 'deps';
+import { accepts } from 'https://deno.land/std@0.170.0/http/negotiation';
 import { CBV, MongoCBVSchema } from 'schemas';
 import { issues } from './helpers/connection.ts';
 import { getSeverity } from './helpers/functions.ts';
@@ -154,7 +155,46 @@ const mongodb_find_by_latest = async (
 	}
 };
 
-// TODO: filter by latest added will require to store timestamps as a number a search for the biggest ones, alternative create a second collection that contains an array of the requiere lenght (i.e. 10), and push / pop in that array on every new save on issues collection
+
+const mongodb_find_for_home_page = async (input: Record<string, Record<string, number>>) => {
+	try {
+		const get_items_with_timeframe = await mongodb_find_with_time_frame(input);
+		// blockchain issues count
+		const blockchain_new_issues = get_items_with_timeframe.map((item: MongoCBVSchema): string => {
+			return item.cbv.blockchain
+		})
+		const bc_counts: Record<string, number> = {}
+		for (const bc of blockchain_new_issues) {
+			bc_counts[bc] = (bc_counts[bc] || 0) + 1
+		}
+		// severity issues count
+		const severiry_new_issues = get_items_with_timeframe.map((item: MongoCBVSchema): string => {
+			return item.cbv.severity
+		})
+		const sev_counts: Record<string, number> = {}
+		for (const sev of severiry_new_issues) {
+			sev_counts[sev] = (sev_counts[sev] || 0) + 1
+		}
+		// severity contributors count
+		const credits_new_issues = get_items_with_timeframe.map((item: MongoCBVSchema): string => {
+			return item.cbv.severity
+		})
+		const cred_counts: Record<string, number> = {}
+		for (const usr of severiry_new_issues) {
+			cred_counts[usr] = (cred_counts[usr] || 0) + 1
+		}
+			
+		//returning object
+		const return_object = {
+			total_new_cbv_by_blockchain: bc_counts,
+			total_new_cbv_by_severity: sev_counts,
+			total_new_cbv_contributors: credits_new_issues,
+		}
+		return return_object
+	} catch (error) {
+		return error.message;
+	}
+};
 
 export {
 	mongodb_find_all_cbv,
@@ -162,6 +202,7 @@ export {
 	mongodb_find_by_cbv_code,
 	mongodb_find_by_id,
 	mongodb_find_by_latest,
+	mongodb_find_for_home_page,
 	mongodb_find_with_labels,
 	mongodb_find_with_search_string,
 	mongodb_find_with_time_frame,
