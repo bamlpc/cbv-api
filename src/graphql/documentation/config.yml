@@ -9,7 +9,7 @@ introspection:
 
 info:
   title: CBV GraphQL API Reference
-  description: This is the documentation for the CBV API v1. Navite to https://cbv-api.deno.dev/graphql to enter the playground
+  description: This is the documentation for the CBV API v1. Navite to https://cbv-api.deno.dev/graphql to enter the playground. Navite to https://github.com/bamlpc/cbv-api to checkout the source code.
   termsOfService: ToDo
   contact:
     name: Bruno Mogetta

@@ -179,7 +179,7 @@ const mongodb_find_for_home_page = async (input: Record<string, Record<string, n
 			return item.cbv.credits
 		})
 		const cred_counts: Record<string, number> = {}
-		for (const usr of severiry_new_issues) {
+		for (const usr of credits_new_issues) {
 			cred_counts[usr] = (cred_counts[usr] || 0) + 1
 		}
 			
@@ -187,7 +187,7 @@ const mongodb_find_for_home_page = async (input: Record<string, Record<string, n
 		const return_object = {
 			blockchains: JSON.stringify(bc_counts),
 			severities: JSON.stringify(sev_counts),
-			contributors: JSON.stringify(credits_new_issues),
+			contributors: JSON.stringify(cred_counts),
 		}
 		return return_object
 	} catch (error) {
