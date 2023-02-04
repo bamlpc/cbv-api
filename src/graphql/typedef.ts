@@ -27,6 +27,7 @@ const typeDefs = gql`
   }
   type Query {
     find_all_cbv: [StoreCBV],
+    find_report_data: [ReportData]
     find_by_id(_id: String): StoreCBV,
     find_by_blockchain(blockchain: [String]): [StoreCBV],
     find_by_cbv_code(cbv_id: String): StoreCBV,
@@ -69,6 +70,11 @@ const typeDefs = gql`
     blockchains: String
     severities: String
     contributors: String
+  }
+
+  type ReportData {
+    number_of_issues: String!
+    average_severity: String!
   }
 `;
 

@@ -1,6 +1,6 @@
 import { mongo } from 'deps';
 import { MONGODB } from 'environment';
-import { MongoCBVSchema } from 'schemas';
+import { StoredMongoCBVSchema } from 'schemas';
 
 // iniciate mongo
 const client = new mongo.MongoClient();
@@ -24,6 +24,6 @@ await client.connect({
 
 // Access Collection
 const db = client.database(MONGODB.DB_NAME);
-const issues = db.collection<MongoCBVSchema>(MONGODB.COLLECTION);
+const issues = db.collection<StoredMongoCBVSchema>(MONGODB.COLLECTION);
 
 export { issues };

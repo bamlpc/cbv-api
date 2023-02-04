@@ -5,15 +5,17 @@ import {
 	mongodb_find_by_cbv_code,
 	mongodb_find_by_id,
 	mongodb_find_by_latest,
+	mongodb_find_for_home_page,
+	mongodb_find_report_data,
 	mongodb_find_with_search_string,
 	mongodb_find_with_time_frame,
-	mongodb_find_for_home_page,
 } from '../mongodb/methods.ts';
 import { store_cbv_with_credentials } from '../helpers/graphql_post_handler.ts';
 
 const resolvers = {
 	Query: {
 		find_all_cbv: () => mongodb_find_all_cbv(),
+		find_report_data: () => mongodb_find_report_data(),
 		// deno-lint-ignore no-explicit-any
 		find_by_latest: (_root: any, args: Record<string, string>) =>
 			mongodb_find_by_latest(args),

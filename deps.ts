@@ -14,3 +14,4 @@ export * as mongo from 'third/mongo@v0.31.1/mod.ts';
 export { withCors } from 'third/cors_protocol@1.0.0-beta.5/mod.ts';
 export { Application, Router, send } from 'third/oak@v11.1.0/mod.ts';
 export type { RouterContext } from 'third/oak@v11.1.0/mod.ts';
+export * as dateFns from 'https://cdn.skypack.dev/date-fns@^2.29.2';
