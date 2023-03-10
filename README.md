@@ -4,8 +4,7 @@ Common Blockchain Vulnerabilities and Exposures API
 
 # Initialization
 
-This will install _**deno**_ as runtime, _**denon**_ as script runner and
-_**dpx**_ to run packages without installing them
+This will install _**deno**_ as runtime, _**denon**_ as script runner
 
 Pre-requisites to local development:
 
@@ -21,7 +20,7 @@ make denoinstall
 make setup
 ```
 
-Then add the path of denon and dpx:
+Then add the path of Denon:
 
 ```sh
 denoBinPath=`echo $SHELL | rev | cut -d'/' -f-1 | rev`"rc"
@@ -30,21 +29,11 @@ echo 'export PATH="$HOME/.deno/bin:$PATH"' >> $HOME/.$denoBinPath
 
 # Deno cache
 
-This project requires dependencies to be in cache. Run:
+This project requires dependencies to be in the cache. Run:
 
 ```bash
 make cache
 ```
-
-# Docker
-
-| Run 	| Description 	|
-|------------------	|--------------------------------------------------------------------------	|
-| `make devrun`| run _**deno:dev**_ container 	| | `make prodbuild`| build a
-container _**deno:prod**_ for production 	| | `make prodrun`| run _**deno:prod**_
-container 	| | `make devbuild`| build a container _**deno:dev**_ for development
-( w/o building the app) 	| | `make prune`| _**delete**_ all docker
-images,networks and containers 	|
 
 # Documentation
 
@@ -56,7 +45,7 @@ images,networks and containers 	|
 
 # Regenerate GraphQL documentation
 
-_**requeries npx**_
+_**requires npx**_
 
 ```bash
 npx spectaql src/graphql/documentation/config.yml
